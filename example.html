@@ -44,7 +44,7 @@ function getLocation() {
 	  //Find nearest Marketo office to user's location
 	  function findNearestOffice(position) {
 	    var nearestOffice = geolib.findNearest({latitude: position.coords.latitude, longitude: position.coords.longitude}, officeLocations);
-	    x.innerHTML = officePhoneNumbers[nearestOffice.key];
+	    x.innerHTML = "Marketo Location: " + nearestOffice.key + "<br>Marketo Phone Number: " +  officePhoneNumbers[nearestOffice.key];
 	  },
 	  function () {
 	    x.innerHTML = "Marketo Location: San Mateo<br>Marketo Phone Number: +1-877-260-6586";
