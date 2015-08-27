@@ -39,18 +39,17 @@ var officePhoneNumbers = {
 }
 
 //Method to get user's current location. Returns a position object with user's geo coordinates
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(findNearestOffice);
-    } else {
-        x.innerHTML = "Marketo Location: San Mateo<br>Marketo Phone Number: +1-877-260-6586";
-    }
-}
-
-//Find nearest Marketo office to user's location
-function findNearestOffice(position) {
-        var nearestOffice = geolib.findNearest({latitude: position.coords.latitude, longitude: position.coords.longitude}, officeLocations);
-        x.innerHTML = "Marketo Location: " + nearestOffice.key + "<br>Marketo Phone Number: " +  officePhoneNumbers[nearestOffice.key];
+function getLocation() {    
+	navigator.geolocation.getCurrentPosition(
+	  //Find nearest Marketo office to user's location
+	  function findNearestOffice(position) {
+	    var nearestOffice = geolib.findNearest({latitude: position.coords.latitude, longitude: position.coords.longitude}, officeLocations);
+	    x.innerHTML = officePhoneNumbers[nearestOffice.key];
+	  },
+	  function () {
+	    x.innerHTML = "Marketo Location: San Mateo<br>Marketo Phone Number: +1-877-260-6586";
+	  }
+	);
 }
 </script>
 </body>
